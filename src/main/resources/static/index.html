@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+    <script src="js/jquery/jquery.min.js"></script>
+</head>
+<body>
+<h1 id="message"></h1>
+<script type="text/javascript">
+$(function () {
+    var tokenValue = window.localStorage.getItem('token');
+    $.ajax({
+        headers: {
+            "token":tokenValue               //此处放置请求到的用户token
+        },
+        type: "get",
+        url: "http://localhost:8080/getMessage",
+        data: {},
+        datatype: "json",
+        success: function (data) {
+            $("#message").text("测试成功，返回内容" + data.message);
+            console.log(data);
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+})
+</script>
+</body>
+</html>

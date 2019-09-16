@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jay.application.dao.UsersDao">
+
+ 	<resultMap id="BaseResultMap" type="com.jay.application.pojo.Users">
+        <result column="user_id" property="userId" />
+        <result column="user_ip" property="userIp" />
+        <result column="user_name" property="userName" />
+        <result column="user_password" property="userPassword" />
+        <result column="user_email" property="userEmail" />
+        <result column="user_profile_photo" property="userProfilePhoto" />
+        <result column="user_registration_time" property="userRegistrationTime" />
+        <result column="user_birthday" property="userBirthDay" />
+        <result column="user_age" property="userAge" />
+        <result column="user_telephone_number" property="userTelephoneNumber" />
+        <result column="user_nickname" property="userNickName" />
+    </resultMap>
+    
+    <select id="getAll" resultMap="BaseResultMap">
+        select * from users
+    </select>
+     
+    
+    <select id="loginByUserName" resultMap="BaseResultMap">
+    	select * from users
+    	<where>
+    		1 = 1
+	    	<if test="userName != null and userName != ''">
+	    		and user_name = #{userName}
+	    	</if>
+    	</where>
+    </select>
+ 
+ 	<select id="getUsersById" resultMap="BaseResultMap">
+    	select * from users
+    	<where>
+    		1 = 1
+	    	<if test="userId != null and userId != ''">
+	    		and user_id = #{userId}
+	    	</if>
+    	</where>
+    </select>
+</mapper>

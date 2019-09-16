@@ -1,0 +1,38 @@
+logging:
+    level:
+        com:
+            jay:
+                application:
+                    dao: debug
+mybatis:
+    mapper-locations: classpath:mapping/*Mapping.xml
+    type-aliases-package: com.jay.application.pojo
+server:
+    port: 8080
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        druid:
+            connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+            filters: stat,wall,log4j
+            initialSize: 5
+            maxActive: 20
+            maxPoolPreparedStatementPerConnectionSize: 20
+            maxWait: 60000
+            minEvictableIdleTimeMillis: 300000
+            minIdle: 5
+            poolPreparedStatements: true
+            testOnBorrow: false
+            testOnReturn: false
+            testWhileIdle: true
+            timeBetweenEvictionRunsMillis: 60000
+            useGlobalDataSourceStat: true
+            validationQuery: SELECT 1 FROM DUAL
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+        username: root
+    devtools:
+        restart:
+            additional-paths: src/main/java
+            enabled: true

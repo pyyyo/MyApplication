@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog -- Login</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script src="js/jquery/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="content">
+    <div class="login-header">
+        <img src="img/form/logo.png">
+    </div>
+    <form>
+        <div class="login-input-box">
+            <span class="icon icon-user"></span>
+            <input type="text" id="username" placeholder="请输入用户名或邮箱">
+        </div>
+        <div class="login-input-box">
+            <span class="icon icon-password"></span>
+            <input type="password" id="password" placeholder="请输入密码">
+        </div>
+    </form>
+    <div class="remember-box">
+        <label>
+            <input type="checkbox">&nbsp;记住密码
+        </label>
+        <span id="message"></span>
+    </div>
+    <div class="login-button-box">
+        <input type="button" value="登录" id="btn"/>
+    </div>
+    <div class="logon-box">
+        <a href="#">忘记密码?</a>
+        <a href="registered.html">注册</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        window.localStorage.removeItem('token');
+    	$("input").blur(function(){
+    		$("#message").html("");
+    	});
+    	
+    	$(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+              $('#btn').triggerHandler('click');
+            }
+        });
+    	
+        $('#btn').click(function (e) {
+        	
+            var userName = $("#username").val();
+            var passWord = $("#password").val();
+
+            if (userName == null || userName == '' || passWord == null || passWord == '') {
+                $("#message").html("用户名或密码不能为空,请重新填写后提交");
+                return;
+            };
+
+            $.ajax({
+                type: "get",
+                url: "http://localhost:8080/login",
+                data: { userName, passWord },
+                datatype: "json",
+                success: function (data) {
+                    console.log(data); 
+                    $("#message").html(data.message);
+                    if(data.code == 200){
+                        window.localStorage.setItem('token',data.data.token);
+                        //alert(window.localStorage.getItem('token'));
+                        window.location.href = "index.html";
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

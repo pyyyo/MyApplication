@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog -- registered</title>
+    <link rel="stylesheet" type="text/css" href="css/registered.css">
+    <script src="js/jquery/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="content">
+    <div class="login-header">
+        <img src="img/form/logo.png">
+    </div>
+    <form>
+        <div class="login-input-box">
+            <span class="icon icon-user"></span>
+            <input type="text" id="username" placeholder="请输入用户名">
+        </div>
+        <div class="login-input-box">
+            <span class="icon icon-password"></span>
+            <input type="password" id="password" placeholder="请输入密码">
+        </div>
+        <div class="login-input-box">
+            <span class="icon icon-password"></span>
+            <input type="password" id="confirmpassword" placeholder="请再次输入密码">
+        </div>
+        <div class="login-input-box">
+            <span class="icon icon-phone"></span>
+            <input type="text" id="phone" placeholder="请输入手机号">
+        </div>
+        <div class="login-input-box">
+            <span class="icon icon-vcode"></span>
+            <input type="text" id="vcode" placeholder="请输入验证码">
+        </div>
+    </form>
+    <div class="remember-box">
+        <span id="message"></span>
+    </div>
+    <div class="login-button-box">
+        <input type="button" value="注册" id="btn"/>
+    </div>
+    <div class="logon-box">
+        <a href="#">忘记密码?</a>
+        <a href="login.html">去登录</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+    	$("input").blur(function(){
+    		$("#message").html("");
+    	});
+    	
+    	$(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+              $('#btn').triggerHandler('click');
+            }
+        });
+    	
+        $('#btn').click(function (e) {
+        	
+            var userName = $("#username").val();
+            var passWord = $("#password").val();
+            var confirmpassword = $("#confirmpassword").val();
+
+            if (userName == null || userName == '' || passWord == null || passWord == '' || confirmpassword == null || confirmpassword == '') {
+                $("#message").html("用户名或密码不能为空,请重新填写后提交");
+                return;
+            }
+            
+            if(passWord != confirmpassword){
+            	$("#message").html("两次输入密码需一致,请重新填写后提交");
+            	return;
+            }
+
+            $.ajax({
+                type: "get",
+                url: "http://localhost:8080/login",
+                data: { userName, passWord },
+                datatype: "json",
+                success: function (data) {
+                    console.log(data); 
+                    $("#message").html(data.states);
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
