@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html lang="zh-CN">
 
 <head>
     <title>Suppablog - Minimal Blog Html Template</title>
@@ -33,7 +33,7 @@
         <tbody>
             <tr>
                 <td>
-                    <img src="images/ajax-document-loader.gif" alt="Loading...">
+                    <img src="images/logo.png" alt="Loading...">
                 </td>
             </tr>
         </tbody>
@@ -59,7 +59,6 @@
                     <li><a href="index.html" class="current">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="scroll.html">Scroll</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
             <footer>
@@ -72,7 +71,7 @@
         <div class="menu-right-part">
             <div class="logo-holder">
                 <a href="index.html">
-                    <img src="images/logo.png" alt="Suppablog WP">
+                    <img src="images/ajax-document-loader.gif" alt="Suppablog WP">
                 </a>
             </div>
             <div class="toggle-holder">
@@ -98,7 +97,7 @@
     <!-- Home Content -->
     <div id="content" class="site-content">
         <div id="blog-wrapper">
-            <div class="blog-holder center-relative">
+            <div class="blog-holder center-relative" id="par">
 
 
                 <article id="post-1" class="blog-item-holder featured-post">
@@ -126,110 +125,6 @@
                         </div>
                     </div>
                 </article>
-
-
-                <article id="post-2" class="blog-item-holder">
-                    <div class="entry-content relative">
-                        <div class="content-1170 center-relative">
-                            <h2 class="entry-title">
-                                <a href="single.html" id="post-2-title">I like to reinvent myself</a>
-                            </h2>
-                            <div class="cat-links">
-                                <ul>
-                                    <li>
-                                        <a href="#" id="post-2-username">Science</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="entry-date published" id="post-2-date">February 12, 2016</div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </article>
-
-
-                <article id="post-3" class="blog-item-holder">
-                    <div class="entry-content relative">
-                        <div class="content-1170 center-relative">
-                            <h2 class="entry-title">
-                                <a href="single.html" id="post-3-title">Everything is design</a>
-                            </h2>
-                            <div class="cat-links">
-                                <ul>
-                                    <li>
-                                        <a href="#" id="post-3-username">Art</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="entry-date published" id="post-3-date">February 12, 2016</div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </article>
-
-
-
-                <article id="post-4" class="blog-item-holder">
-                    <div class="entry-content relative">
-                        <div class="content-1170 center-relative">
-                            <h2 class="entry-title">
-                                <a href="single.html" id="post-4-title">It’s all about experience</a>
-                            </h2>
-                            <div class="cat-links">
-                                <ul>
-                                    <li>
-                                        <a href="#" id="post-4-username">Life</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="entry-date published" id="post-4-date">February 12, 2016</div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </article>
-
-
-
-                <article id="post-5" class="blog-item-holder">
-                    <div class="entry-content relative">
-                        <div class="content-1170 center-relative">
-                            <h2 class="entry-title">
-                                <a href="single.html" id="post-5-title">This is not my code</a>
-                            </h2>
-                            <div class="cat-links">
-                                <ul>
-                                    <li>
-                                        <a href="#" id="post-5-username">Coding</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="entry-date published" id="post-5-date">February 12, 2016</div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </article>
-
-
-
-                <article id="post-6" class="blog-item-holder">
-                    <div class="entry-content relative">
-                        <div class="content-1170 center-relative">
-                            <h2 class="entry-title">
-                                <a href="single.html" id="post-6-title">Support human activity</a>
-                            </h2>
-                            <div class="cat-links">
-                                <ul>
-                                    <li>
-                                        <a href="#" id="post-6-username">Advocacy</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="entry-date published" id="post-6-date">February 12, 2016</div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </article>
-
             </div>
             <div class="clear"></div>
             <div class="block load-more-holder">LOAD MORE ENTRIES</div>
@@ -271,12 +166,28 @@
                             jQuery("#post-" + temp + "-title").attr('href','single.html?id='+data.data[index].articlId);
                             jQuery("#post-" + temp + "-date").text(data.data[index].articDateString);
                             jQuery("#post-" + temp + "-username").text(data.data[index].users.userName);
-                            jQuery("#post-" + temp + "-content").text(data.data[index].articContent);
+                            jQuery("#post-" + temp + "-content").html(data.data[index].articContent);
                         } else {
-                            jQuery("#post-" + temp + "-title").text(data.data[index].articlTitle);
-                            jQuery("#post-" + temp + "-title").attr('href','single.html?id='+data.data[index].articlId);
-                            jQuery("#post-" + temp + "-date").text(data.data[index].articDateString);
-                            jQuery("#post-" + temp + "-username").text(data.data[index].users.userName);
+                            var str = "";
+                            str = str + "<article class='blog-item-holder' id='post-"+temp+"'>";
+                            str = str + "<div class='entry-content relative'>";
+                            str = str + "<div class='content-1170 center-relative'>";
+                            str = str + "<h2 class='entry-title'>";
+                            str = str + "<a href='single.html?id='"+data.data[index].articlId+">"+data.data[index].articlTitle+"</a>";
+                            str = str + "</h2>";
+                            str = str + "<div class='cat-links'>";
+                            str = str + "<ul>";
+                            str = str + "<li>";
+                            str = str + "<a href='#''>"+data.data[index].users.userName+"</a>";
+                            str = str + "</li>";
+                            str = str + "</ul>";
+                            str = str + "</div>";
+                            str = str + "<div class='entry-date published'>"+data.data[index].articDateString+"</div>";
+                            str = str + "<div class='clear'></div>";
+                            str = str + "</div>";
+                            str = str + "</div>";
+                            str = str + "</article>";
+                            jQuery("#par").append(str);
                         }
                     }
                 },

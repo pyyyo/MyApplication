@@ -54,7 +54,13 @@
 		SELECT 
 			<include refid="allColumn"/>,<include refid="userColumn"/>
 		FROM articles,users
-		WHERE articles.user_id = users.id
+		<where>
+			articles.user_id = users.id
+		</where>
+		ORDER BY 
+			article_date 
+		DESC
+		LIMIT 0,6
 	</select>
 	
 	<select id="getArticlesById" resultMap="BaseResultMap">

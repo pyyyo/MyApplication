@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html lang="zh-CN">
 
 <head>
     <title>Suppablog - Minimal Blog Html Template</title>
@@ -34,7 +34,7 @@
         <tbody>
             <tr>
                 <td>
-                    <img src="images/ajax-document-loader.gif" alt="Loading...">
+                    <img src="images/loading.gif" alt="Loading...">
                 </td>
             </tr>
         </tbody>
@@ -60,7 +60,6 @@
                     <li><a href="index.html" class="current">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="scroll.html">Scroll</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
             <footer>
@@ -99,7 +98,7 @@
     <!-- Single Content -->
     <div id="content" class="site-content center-relative">
         <div class="single-post-wrapper content-1070 center-relative">
-            <div class="content-wrap content-660 center-relative ">
+            <div class="content-wrap content-660 center-relative " id="parhtml">
                 <h1 class="entry-title">十大排序算法全面解析-Java实现</h1>
                 <h2 class="entry-title">前言</h2>
                 <hr />
@@ -179,6 +178,7 @@
                 datatype: "json",
                 success: function (data) {
                     console.log(data);
+                    jQuery("#parhtml").html(data.data.articContent);
                 },
                 error: function (e) {
                     console.log(e);
