@@ -3,7 +3,7 @@
 <mapper namespace="com.jay.application.dao.UsersDao">
 
  	<resultMap id="BaseResultMap" type="com.jay.application.pojo.Users">
-        <result column="user_id" property="userId" />
+        <id column="id" property="id" />
         <result column="user_ip" property="userIp" />
         <result column="user_name" property="userName" />
         <result column="user_password" property="userPassword" />
@@ -16,13 +16,31 @@
         <result column="user_nickname" property="userNickName" />
     </resultMap>
     
+    <sql id="allColumn">
+    	id,
+    	user_ip,
+    	user_name,
+    	user_password,
+    	user_email,
+    	user_profile_photo,
+    	user_registration_time,
+    	user_birthday,
+    	user_age,
+    	user_telephone_number,
+    	user_nickname
+    </sql>
+    
     <select id="getAll" resultMap="BaseResultMap">
-        select * from users
+        select 
+        	<include refid="allColumn"/>
+        from users
     </select>
      
     
     <select id="loginByUserName" resultMap="BaseResultMap">
-    	select * from users
+    	select 
+    		<include refid="allColumn"/> 
+    	from users
     	<where>
     		1 = 1
 	    	<if test="userName != null and userName != ''">
@@ -32,11 +50,13 @@
     </select>
  
  	<select id="getUsersById" resultMap="BaseResultMap">
-    	select * from users
+    	select 
+    		<include refid="allColumn"/> 
+    	from users
     	<where>
     		1 = 1
-	    	<if test="userId != null and userId != ''">
-	    		and user_id = #{userId}
+	    	<if test="id != null and id != ''">
+	    		and id = #{id}
 	    	</if>
     	</where>
     </select>

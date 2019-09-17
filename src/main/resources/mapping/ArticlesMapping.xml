@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jay.application.dao.ArticlesDao">
+
+	<resultMap id="BaseResultMap" type="com.jay.application.pojo.Articles">
+		<result column="article_id" property="articlId"/>
+		<result column="user_id" property="userId"/>
+		<result column="article_title" property="articlTitle"/>
+		<result column="article_content" property="articContent"/>
+		<result column="article_views" property="articlViews"/>
+		<result column="article_comment_count" property="articCommentCount"/>
+		<result column="article_date" property="articDate"/>
+		<result column="article_like_count" property="articLikeCount"/>
+		<association property="users"  javaType="com.jay.application.pojo.Users">
+            <id column="id" property="id" />
+	        <result column="user_ip" property="userIp" />
+	        <result column="user_name" property="userName" />
+	        <result column="user_password" property="userPassword" />
+	        <result column="user_email" property="userEmail" />
+	        <result column="user_profile_photo" property="userProfilePhoto" />
+	        <result column="user_registration_time" property="userRegistrationTime" />
+	        <result column="user_birthday" property="userBirthDay" />
+	        <result column="user_age" property="userAge" />
+	        <result column="user_telephone_number" property="userTelephoneNumber" />
+	        <result column="user_nickname" property="userNickName" />
+        </association>
+	</resultMap>
+	
+	<sql id="allColumn">
+		article_id,
+		user_id,
+		article_title,
+		article_content,
+		article_views,
+		article_comment_count,
+		article_date,
+		article_like_count
+	</sql>
+	<sql id="userColumn">
+		id,
+    	user_ip,
+    	user_name,
+    	user_password,
+    	user_email,
+    	user_profile_photo,
+    	user_registration_time,
+    	user_birthday,
+    	user_age,
+    	user_telephone_number,
+    	user_nickname
+	</sql>
+	
+	<select id="getArticlesAll" resultMap="BaseResultMap">
+		SELECT 
+			<include refid="allColumn"/>,<include refid="userColumn"/>
+		FROM articles,users
+		WHERE articles.user_id = users.id
+	</select>
+	
+	<select id="getArticlesById" resultMap="BaseResultMap">
+		SELECT
+			<include refid="allColumn"/>,<include refid="userColumn"/>
+		FROM articles,users
+		<where>
+			articles.user_id = users.id
+	    	<if test="articlId != null">
+	    		and article_id = #{articlId}
+	    	</if>
+		</where>
+	</select>
+</mapper>

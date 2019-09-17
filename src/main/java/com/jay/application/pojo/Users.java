@@ -5,10 +5,9 @@ import java.util.Date;
 /**
  *  用户表
  * @author Jay
- *D
  */
 public class Users {
-	private Integer userId;								//id
+	private Integer id;								//id
 	private String userIp;								//IP
 	private String userName;							//用户名
 	private String userPassword;						//密码
@@ -21,11 +20,12 @@ public class Users {
 	private String userNickName;						//昵称
 	private String token;								//token
 	
-	public Integer getUserId() {
-		return userId;
+	
+	public Integer getId() {
+		return id;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getUserIp() {
 		return userIp;
@@ -95,7 +95,7 @@ public class Users {
 	}
 	@Override
 	public String toString() {
-		return "Users [userId=" + userId + ", userIp=" + userIp + ", userName=" + userName + ", userPassword="
+		return "Users [id=" + id + ", userIp=" + userIp + ", userName=" + userName + ", userPassword="
 				+ userPassword + ", userEmail=" + userEmail + ", userProfilePhoto=" + userProfilePhoto
 				+ ", userRegistrationTime=" + userRegistrationTime + ", userBirthDay=" + userBirthDay + ", userAge="
 				+ userAge + ", userTelephoneNumber=" + userTelephoneNumber + ", userNickName=" + userNickName
