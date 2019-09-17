@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 16/09/2019 18:35:22
+ Date: 17/09/2019 18:03:30
 */
 
 SET NAMES utf8mb4;
@@ -32,8 +32,8 @@ CREATE TABLE `articles`  (
   `article_like_count` bigint(20) NOT NULL,
   PRIMARY KEY (`article_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '博文表' ROW_FORMAT = Dynamic;
+  CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '博文表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for comments
@@ -51,7 +51,7 @@ CREATE TABLE `comments`  (
   INDEX `article_id`(`article_id`) USING BTREE,
   INDEX `comment_date`(`comment_date`) USING BTREE,
   INDEX `parent_comment_id`(`parent_comment_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for labels
@@ -105,22 +105,6 @@ CREATE TABLE `sorts`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for t_danmus
--- ----------------------------
-DROP TABLE IF EXISTS `t_danmus`;
-CREATE TABLE `t_danmus`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `time` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `cardLevel` int(11) NULL DEFAULT NULL,
-  `cardName` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `level` int(11) NOT NULL,
-  `roomId` int(11) NOT NULL,
-  `userName` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `text` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for user_friends
 -- ----------------------------
 DROP TABLE IF EXISTS `user_friends`;
@@ -139,7 +123,7 @@ CREATE TABLE `user_friends`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
-  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `user_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户IP',
   `user_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
   `user_password` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户密码',
@@ -150,7 +134,7 @@ CREATE TABLE `users`  (
   `user_age` tinyint(4) NULL DEFAULT NULL COMMENT '用户年龄',
   `user_telephone_number` int(11) NOT NULL COMMENT '用户手机号',
   `user_nickname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户昵称',
-  PRIMARY KEY (`user_id`) USING BTREE,
+  PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_name`(`user_name`) USING BTREE,
   INDEX `user_nickname`(`user_nickname`) USING BTREE,
   INDEX `user_email`(`user_email`) USING BTREE,
