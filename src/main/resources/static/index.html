@@ -167,6 +167,11 @@
                             jQuery("#post-" + temp + "-date").text(data.data[index].articDateString);
                             jQuery("#post-" + temp + "-username").text(data.data[index].users.userName);
                             jQuery("#post-" + temp + "-content").html(data.data[index].articContent);
+                            var content = jQuery("#post-" + temp + "-content").html();
+                            if(content.length > 200){
+                                content = content.substring(0,200) + "...";
+                                jQuery("#post-" + temp + "-content").html(content);
+                            }
                         } else {
                             var str = "";
                             str = str + "<article class='blog-item-holder' id='post-"+temp+"'>";
