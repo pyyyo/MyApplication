@@ -2,18 +2,26 @@ package com.jay.application.utils;
 import com.alibaba.fastjson.JSON;
 
 /**
- * @DESCRIPTION 统一API响应结果封装
+ * 统一API响应结果封装
+ * @author jay
+ *
  */
 public class RestResult {
     public void setCode(int code) {
         this.code = code;
     }
-
-    private int code;//状态码
-
-    private String message;//消息
-
-    private Object data;//数据
+    /**
+     * 状态码
+     */
+    private int code;
+    /**
+     * 消息
+     */
+    private String message;
+    /**
+     * 数据
+     */
+    private Object data;
 
     public RestResult setCode(ResultCode resultCode) {
         this.code = resultCode.code();

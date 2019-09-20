@@ -7,13 +7,34 @@ import java.util.Date;
  * @author Jay
  */
 public class Comments {
-	private Integer commentId;					//评论Id
-	private Integer userId;						//用户Id
-	private Integer articleId;					//博文Id
-	private Integer commentLikeCount;			//点赞数
-	private Date commentDate;					//评论日期
-	private String commentContent;				//评论内容
-	private Comments parentComments;			//父评论
+	/**
+	 * 评论Id
+	 */
+	private Integer commentId;
+	/**
+	 * 用户Id
+	 */
+	private Integer userId;
+	/**
+	 * 博文Id
+	 */
+	private Integer articleId;
+	/**
+	 * 点赞数
+	 */
+	private Integer commentLikeCount;
+	/**
+	 * 评论日期
+	 */
+	private Date commentDate;
+	/**
+	 * 评论内容
+	 */
+	private String commentContent;
+	/**
+	 * 父评论
+	 */
+	private Comments parentComments;
 	
 	public Integer getCommentId() {
 		return commentId;

@@ -7,18 +7,54 @@ import java.util.Date;
  * @author Jay
  */
 public class Users {
-	private Integer id;								//id
-	private String userIp;								//IP
-	private String userName;							//用户名
-	private String userPassword;						//密码
-	private String userEmail;							//email
-	private String userProfilePhoto;					//头像
-	private Date userRegistrationTime;					//注册时间
-	private Date userBirthDay;							//生日
-	private Integer userAge;							//年龄
-	private Integer userTelephoneNumber;				//手机
-	private String userNickName;						//昵称
-	private String token;								//token
+	/**
+	 * id
+	 */
+	private Integer id;
+	/**
+	 * IP
+	 */
+	private String userIp;
+	/**
+	 * 用户名
+	 */
+	private String userName;
+	/**
+	 * 密码
+	 */
+	private String userPassword;
+	/**
+	 * email
+	 */
+	private String userEmail;
+	/**
+	 * 头像
+	 */
+	private String userProfilePhoto;
+	/**
+	 * 注册时间
+	 */
+	private Date userRegistrationTime;
+	/**
+	 * 生日
+	 */
+	private Date userBirthDay;
+	/**
+	 * 年龄
+	 */
+	private Integer userAge;
+	/**
+	 * 手机
+	 */
+	private Integer userTelephoneNumber;
+	/**
+	 * 昵称
+	 */
+	private String userNickName;
+	/**
+	 * token
+	 */
+	private String token;
 	
 	
 	public Integer getId() {

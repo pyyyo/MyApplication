@@ -224,8 +224,9 @@ public class DateUtils {
      * @author kevin
      */
     public static String changeFormatDateString(String format1, String format2, String strDate) {
-        if (strDate == null)
+        if (strDate == null) {
             return "";
+        }
         if (strDate.length() >= format1.length() && format1.length() >= format2.length()) {
             return parseDateToString(parseStringToDate(strDate, format1), format2);
         }
@@ -326,7 +327,13 @@ public class DateUtils {
                 .format(dateTimeFormatter);
     }
 
-    // 比较两个字符串格式日期大小,带格式的日期
+    /**
+     * 比较两个字符串格式日期大小,带格式的日期
+     * @param strdat1
+     * @param strdat2
+     * @param format
+     * @return
+     */
     public static boolean isBefore(String strdat1, String strdat2, String format) {
         try {
             Date dat1 = parseStringToDate(strdat1, format);
@@ -338,7 +345,13 @@ public class DateUtils {
         }
     }
 
-    // 比较两个字符串格式日期大小,带格式的日期,返回int
+    /**
+     * 比较两个字符串格式日期大小,带格式的日期,返回int
+     * @param strdat1
+     * @param strdat2
+     * @param format
+     * @return
+     */
     public static long isBefore_int(String strdat1, String strdat2, String format) {
         long result = 0;
         try {
@@ -352,8 +365,12 @@ public class DateUtils {
     }
     
 
-    /*
+    /**
      * 得到上一个月或者下一个月的日期
+     * @param theDate
+     * @param month
+     * @param formatStr
+     * @return
      */
     public static String getDayafterMonth(String theDate, int month, String formatStr) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatStr);

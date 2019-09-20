@@ -20,6 +20,11 @@ import com.jay.application.utils.RestResult;
 import com.jay.application.utils.ResultGenerator;
 import com.jay.application.utils.TokenUtils;
 
+/**
+ * 
+ * @author jay
+ *
+ */
 @Controller
 public class IndexController {
 

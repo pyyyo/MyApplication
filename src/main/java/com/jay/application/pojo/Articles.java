@@ -9,17 +9,48 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @author Jay
  */
 public class Articles {
-
-	private Integer articlId;			//博文Id
-	private Integer userId;				//用户Id
-	private String articlTitle;			//博文标题
-	private String articContent;		//博文内容
-	private Integer articlViews;		//浏览量
-	private Integer articCommentCount;	//评论总数
-	private Date articDate;				//发表时间
-	private String articDateString;		//发表时间 String格式
-	private Integer articLikeCount;		//喜欢数
-	private Users users;				//用户
+	
+	/**
+	 * 博文Id
+	 */
+	private Integer articlId;
+	
+	/**
+	 * 用户Id
+	 */
+	private Integer userId;
+	/**
+	 * 博文标题
+	 */
+	private String articlTitle;
+	/**
+	 * 博文内容
+	 */
+	private String articContent;
+	/**
+	 * 浏览量
+	 */
+	private Integer articlViews;
+	/**
+	 * 评论总数
+	 */
+	private Integer articCommentCount;
+	/**
+	 * 发表时间
+	 */
+	private Date articDate;
+	/**
+	 * 发表时间 String格式
+	 */
+	private String articDateString;
+	/**
+	 * 喜欢数
+	 */
+	private Integer articLikeCount;
+	/**
+	 * 用户
+	 */
+	private Users users;				
 	
 	public Integer getArticlId() {
 		return articlId;
