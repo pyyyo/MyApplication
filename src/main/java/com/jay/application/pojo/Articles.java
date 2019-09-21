@@ -2,8 +2,6 @@ package com.jay.application.pojo;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 /**
  *  博文表
  * @author Jay

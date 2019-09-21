@@ -52,8 +52,11 @@
 	
 	<select id="getArticlesAll" resultMap="BaseResultMap">
 		SELECT 
-			<include refid="allColumn"/>,<include refid="userColumn"/>
-		FROM articles,users
+			<include refid="allColumn"/>
+			,
+			<include refid="userColumn"/>
+		FROM 
+		articles,users
 		<where>
 			articles.user_id = users.id
 		</where>
@@ -65,8 +68,11 @@
 	
 	<select id="getArticlesById" resultMap="BaseResultMap">
 		SELECT
-			<include refid="allColumn"/>,<include refid="userColumn"/>
-		FROM articles,users
+			<include refid="allColumn"/>
+			,
+			<include refid="userColumn"/>
+		FROM 
+		articles,users
 		<where>
 			articles.user_id = users.id
 	    	<if test="articlId != null">
