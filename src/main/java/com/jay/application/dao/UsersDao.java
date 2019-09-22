@@ -35,4 +35,11 @@ public interface UsersDao {
 	 * @return
 	 */
 	Users getUsersById(@Param("userId")Integer userId);
+
+	/**
+	 * 注册
+	 * @param users
+	 * @return
+	 */
+	Integer registeredUser(Users users);
 }

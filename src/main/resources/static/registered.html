@@ -60,23 +60,24 @@
         $('#btn').click(function (e) {
         	
             var userName = $("#username").val();
-            var passWord = $("#password").val();
+            var userPassword = $("#password").val();
             var confirmpassword = $("#confirmpassword").val();
+            var userTelephoneNumber = $("#phone").val();
 
-            if (userName == null || userName == '' || passWord == null || passWord == '' || confirmpassword == null || confirmpassword == '') {
-                $("#message").html("用户名或密码不能为空,请重新填写后提交");
+            if (userName == null || userName == '' || userPassword == null || userPassword == '' || confirmpassword == null || confirmpassword == '' || phone == null ||phone == '') {
+                $("#message").html("用户名、密码、手机号不能为空,请重新填写后提交");
                 return;
             }
             
-            if(passWord != confirmpassword){
+            if(userPassword != confirmpassword){
             	$("#message").html("两次输入密码需一致,请重新填写后提交");
             	return;
             }
 
             $.ajax({
                 type: "get",
-                url: "http://localhost:8080/login",
-                data: { userName, passWord },
+                url: "http://localhost:8080/registered",
+                data: { userName, userPassword, userTelephoneNumber },
                 datatype: "json",
                 success: function (data) {
                     console.log(data); 

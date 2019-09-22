@@ -60,4 +60,11 @@
 	    	</if>
     	</where>
     </select>
+
+	<insert id="registeredUser">
+		INSERT INTO
+			users(user_name,user_password,user_telephone_number)
+		VALUES
+			(#{userName},#{userPassword},#{userTelephoneNumber})
+	</insert>
 </mapper>

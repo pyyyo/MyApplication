@@ -25,4 +25,8 @@ public class UsersService {
 	public Users getUsersById(Integer userId) {
 		return usersDao.getUsersById(userId);
 	}
+
+	public Integer registeredUser(Users user){
+		return usersDao.registeredUser(user);
+	}
 }

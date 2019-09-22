@@ -2,6 +2,7 @@ package com.jay.application.controller;
 
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,13 @@ public class IndexController {
 	public String index() {
 		return "index.html";
 	}
-	
+
+	/**
+	 * 登录
+	 * @param userName
+	 * @param passWord
+	 * @return
+	 */
 	@NoToken
 	@ResponseBody
 	@RequestMapping("login")
@@ -59,6 +66,27 @@ public class IndexController {
 		}else {
 			return new ResultGenerator().getFailResult("登录失败,用户名不存在");
 		}
+	}
+
+	/**
+	 * 注册
+	 * @param user
+	 * @return
+	 */
+	@NoToken
+	@ResponseBody
+	@RequestMapping("registered")
+	public RestResult registered(Users user){
+		if(null != user){
+			if(!(user.getUserName().isEmpty() || user.getUserPassword().isEmpty() || user.getUserTelephoneNumber() == null)){
+				// 注册成功
+				Integer temp = usersService.registeredUser(user);
+				if(0 < temp){
+					return new ResultGenerator().getSuccessResult();
+				}
+			}
+		}
+		return new ResultGenerator().getFailResult("注册失败");
 	}
 	
 	@YesToken
