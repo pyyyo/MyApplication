@@ -61,10 +61,10 @@
     	</where>
     </select>
 
-	<insert id="registeredUser">
+	<insert id="registeredUser" parameterType="com.jay.application.pojo.Users">
 		INSERT INTO
-			users(user_name,user_password,user_telephone_number)
+			users(user_name,user_password,user_telephone_number,user_nickname)
 		VALUES
-			(#{userName},#{userPassword},#{userTelephoneNumber})
+			(#{userName},#{userPassword},#{userTelephoneNumber},#{userName})
 	</insert>
 </mapper>

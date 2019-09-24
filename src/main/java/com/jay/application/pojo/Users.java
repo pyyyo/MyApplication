@@ -46,7 +46,7 @@ public class Users {
 	/**
 	 * 手机
 	 */
-	private Integer userTelephoneNumber;
+	private String userTelephoneNumber;
 	/**
 	 * 昵称
 	 */
@@ -111,10 +111,10 @@ public class Users {
 	public void setUserAge(Integer userAge) {
 		this.userAge = userAge;
 	}
-	public Integer getUserTelephoneNumber() {
+	public String getUserTelephoneNumber() {
 		return userTelephoneNumber;
 	}
-	public void setUserTelephoneNumber(Integer userTelephoneNumber) {
+	public void setUserTelephoneNumber(String userTelephoneNumber) {
 		this.userTelephoneNumber = userTelephoneNumber;
 	}
 	public String getUserNickName() {

@@ -56,6 +56,25 @@
               $('#btn').triggerHandler('click');
             }
         });
+
+        $("#username").blur(function(){
+            var userName = $(this).val();
+            if(userName == null || userName == ''){
+                return;
+            }
+            $.ajax({
+                type : "get",
+                url : "http://localhost:8080/getUserByName",
+                data : {userName},
+                dataType : "json",
+                success: function (data){
+                    console.log(data);
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            })
+        })
     	
         $('#btn').click(function (e) {
         	
