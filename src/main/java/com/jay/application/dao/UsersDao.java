@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jay.application.pojo.Users;
 
 /**
- * 
+ * 用户Dao层
  * @author jay
  *
  */

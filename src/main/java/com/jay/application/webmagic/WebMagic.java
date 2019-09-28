@@ -14,7 +14,7 @@ public class WebMagic implements PageProcessor {
 	public Site getSite() {
 		return site;
 	}
-	
+
 	@Override
 	public void process(Page page) {
 		// 文章页，匹配 https://voice.hupu.com/nba/七位数字.html
@@ -28,7 +28,7 @@ public class WebMagic implements PageProcessor {
             page.addTargetRequests(page.getHtml().xpath("/html/body/div[3]/div[1]/div[3]/a[@class='page-btn-prev']/@href").all());
         }
 	}
-	
+
 	public static void main(String[] args) {
         Spider.create(new WebMagic()).addUrl("https://voice.hupu.com/nba/1")
                 .addPipeline(new ConsolePipeline()).run();

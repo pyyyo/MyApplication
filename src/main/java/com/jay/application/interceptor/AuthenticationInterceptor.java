@@ -20,6 +20,10 @@ import com.jay.application.annotation.YesToken;
 import com.jay.application.pojo.Users;
 import com.jay.application.services.UsersService;
 
+/**
+ * token验证
+ * @author jay
+ */
 public class AuthenticationInterceptor implements HandlerInterceptor {
 	
 	@Autowired
