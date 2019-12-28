@@ -6,3 +6,4 @@
 - Mybatis+Druid
 - JWT
 - WebMagic
+- AES和RSA混合加密
