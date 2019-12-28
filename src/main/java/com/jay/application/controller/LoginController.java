@@ -1,12 +1,10 @@
 package com.jay.application.controller;
 
-import com.jay.application.annotation.NoToken;
+import com.jay.application.annotation.*;
 import com.jay.application.pojo.Users;
 import com.jay.application.services.UsersService;
-import com.jay.application.utils.MD5Utils;
-import com.jay.application.utils.RestResult;
-import com.jay.application.utils.ResultGenerator;
-import com.jay.application.utils.TokenUtils;
+import com.jay.application.utils.*;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +29,24 @@ public class LoginController {
     @NoToken
     @ResponseBody
     @RequestMapping("login")
-    public RestResult login(String userName, String passWord) {
+    public RestResult login(String userName, String passWord, String key, String publicKey) throws Exception {
+        System.out.println(userName);           //已用AES密钥加密的用户名
+        System.out.println(passWord);           //已用AES密钥加密的密码
+        System.out.println(key);                //用后端传给前端的RSA公钥加密的前端AES密钥
+        System.out.println(publicKey);          //前端RSA公钥
+        System.out.println(RsaUtil.getPublicKey());//后端RSA公钥
+        byte[] clientAESKey = RsaUtil.decryptByPrivateKey(Base64.decodeBase64(key), RsaUtil.getPrivateKey());
+        String clientAESKeyStr = new String(clientAESKey);
+        System.out.println("解密出来的AES的key：" + clientAESKeyStr);
+
+        clientAESKeyStr = clientAESKeyStr.substring(1, clientAESKeyStr.length() - 1);
+
+        userName = AesUtil.decrypt(userName, clientAESKeyStr);
+        passWord = AesUtil.decrypt(passWord, clientAESKeyStr);
+
+        System.out.println("解密后的用户名：" + userName);
+        System.out.println("解密后的密  码：" + passWord);
+
         if (userName.isEmpty() || passWord.isEmpty()) {
             return new ResultGenerator().getSuccessResult("登录失败,用户名或密码不能为空", null);
         }
@@ -47,6 +62,19 @@ public class LoginController {
         } else {
             return new ResultGenerator().getFailResult("登录失败,用户名不存在");
         }
+    }
+
+    /**
+     * return RSAPublicKey
+     * 前端获取后端RSA公钥接口
+     *
+     * @return
+     */
+    @NoToken
+    @ResponseBody
+    @RequestMapping("getRSAKey")
+    public RestResult getRSAKey() {
+        return new ResultGenerator().getSuccessResult(RsaUtil.getPublicKey());
     }
 
     /**
@@ -74,6 +102,7 @@ public class LoginController {
 
     /**
      * 查询用户名是否已被注册
+     *
      * @param userName
      * @return
      */
