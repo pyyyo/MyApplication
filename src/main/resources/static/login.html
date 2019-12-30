@@ -56,7 +56,6 @@
             }
         });
 
-
     	$("input").blur(function(){
     		$("#message").html("");
     	});
@@ -72,11 +71,9 @@
         window.jsPublicKey = genKeyPair.publicKey;
         window.jsPrivateKey = genKeyPair.privateKey;
         let genKey = aesUtil.genKey();
-        window.aesKey = genKey;
+        //window.aesKey = genKey;
 
-    	
         $('#btn').click(function (e) {
-        	
             let userName = $("#username").val();
             let passWord = $("#password").val();
 
@@ -85,43 +82,28 @@
                 return;
             };
 
-            console.log("用户名原文："+userName);
-            console.log("密  码原文："+passWord);
             userName = aesUtil.encrypt(userName,genKey);
-            console.log("通过前端AES密钥加密后的用户名："+userName)
-
             passWord = aesUtil.encrypt(passWord,genKey);
-            console.log("通过前端AES密钥加密后的密  码："+passWord)
 
-            // let userNameText = rsaUtil.encrypt(userName,window.jsPublicKey);
-            // let passWordText = rsaUtil.encrypt(passWord,window.jsPublicKey);
-            //
-            // console.log("通过RSA公钥加密AES加密后的用户名："+userNameText);
-            // console.log("通过RSA公钥加密AES加密后的密  码："+passWordText);
-            console.log("前端AES密钥："+genKey);
             let key = rsaUtil.encrypt(genKey,serverPublicKey);
-            console.log("通过后端传来的RSA公钥加密AES密钥："+key);
-            let publicKey = window.jsPublicKey;
+            //let publicKey = window.jsPublicKey;
             $.ajax({
                 type: "post",
                 url: "http://localhost:8080/login",
-                data: { userName, passWord, key , publicKey},
+                data: { userName, passWord, key }, //publicKey rsa公钥，日后可能用到
                 datatype: "json",
                 success: function (data) {
-                    console.log(data);
+                    //console.log(rsaUtil.decrypt(data.data,privateKey));
                     $("#message").html(data.message);
                     if(data.code == 200){
                         window.localStorage.setItem('token',data.data.token);
-                        window.location.href = "index.html";
+                        //window.location.href = "index.html";
                     }
                 },
                 error: function (e) {
                     console.log(e);
                 }
             });
-
-
-
         });
     });
 </script>

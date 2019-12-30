@@ -1,5 +1,6 @@
 package com.jay.application.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.jay.application.annotation.*;
 import com.jay.application.pojo.Users;
 import com.jay.application.services.UsersService;
@@ -21,31 +22,26 @@ public class LoginController {
 
     /**
      * 登录
-     *
-     * @param userName
-     * @param passWord
+     * @param userName 用户名
+     * @param passWord 密码
+     * @param key 加密后的aes密钥
+     * @param publicKey client rsa公钥
      * @return
+     * @throws Exception
      */
     @NoToken
     @ResponseBody
     @RequestMapping("login")
-    public RestResult login(String userName, String passWord, String key, String publicKey) throws Exception {
-        System.out.println(userName);           //已用AES密钥加密的用户名
-        System.out.println(passWord);           //已用AES密钥加密的密码
-        System.out.println(key);                //用后端传给前端的RSA公钥加密的前端AES密钥
-        System.out.println(publicKey);          //前端RSA公钥
-        System.out.println(RsaUtil.getPublicKey());//后端RSA公钥
+    public RestResult login(String userName, String passWord, String key/*, String publicKey*/) throws Exception {
+        //rsa解密 得到前端aes的key
         byte[] clientAESKey = RsaUtil.decryptByPrivateKey(Base64.decodeBase64(key), RsaUtil.getPrivateKey());
         String clientAESKeyStr = new String(clientAESKey);
-        System.out.println("解密出来的AES的key：" + clientAESKeyStr);
 
         clientAESKeyStr = clientAESKeyStr.substring(1, clientAESKeyStr.length() - 1);
 
+        //aes解密
         userName = AesUtil.decrypt(userName, clientAESKeyStr);
         passWord = AesUtil.decrypt(passWord, clientAESKeyStr);
-
-        System.out.println("解密后的用户名：" + userName);
-        System.out.println("解密后的密  码：" + passWord);
 
         if (userName.isEmpty() || passWord.isEmpty()) {
             return new ResultGenerator().getSuccessResult("登录失败,用户名或密码不能为空", null);
@@ -55,6 +51,14 @@ public class LoginController {
         if (users != null) {
             if (users.getUserPassword().equals(MD5Utils.calc(passWord))) {
                 users.setToken(TokenUtils.getToken(users));
+
+                //String aesKey = AesUtil.getKey();           //获取后端AES密钥
+                //String data = AesUtil.encrypt(JSON.toJSONString(users),aesKey);//将users对象转换成字符串
+                //data = Base64.encodeBase64String(RsaUtil.encryptByPublicKey(data.getBytes(),publicKey));    //使用前端传来的公钥加密返回的信息
+
+               /* String data = JSON.toJSONString(users);
+                data = Base64.encodeBase64String(RsaUtil.encryptByPublicKey(data.getBytes(),publicKey));*/
+               // 这里如果RSA加密的内容过长的话会导致性能低下，js解密时也会报错，分段解密应该可以解决，日后再看。
                 return new ResultGenerator().getSuccessResult("登录成功", users);
             } else {
                 return new ResultGenerator().getFailResult("登录失败,密码错误");

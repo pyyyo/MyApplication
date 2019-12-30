@@ -55,8 +55,7 @@ public class Users {
 	 * token
 	 */
 	private String token;
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -129,13 +128,22 @@ public class Users {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", userIp=" + userIp + ", userName=" + userName + ", userPassword="
-				+ userPassword + ", userEmail=" + userEmail + ", userProfilePhoto=" + userProfilePhoto
-				+ ", userRegistrationTime=" + userRegistrationTime + ", userBirthDay=" + userBirthDay + ", userAge="
-				+ userAge + ", userTelephoneNumber=" + userTelephoneNumber + ", userNickName=" + userNickName
-				+ ", token=" + token + "]";
+		return "Users{" +
+				"id=" + id +
+				", userIp='" + userIp + '\'' +
+				", userName='" + userName + '\'' +
+				", userPassword='" + userPassword + '\'' +
+				", userEmail='" + userEmail + '\'' +
+				", userProfilePhoto='" + userProfilePhoto + '\'' +
+				", userRegistrationTime=" + userRegistrationTime +
+				", userBirthDay=" + userBirthDay +
+				", userAge=" + userAge +
+				", userTelephoneNumber='" + userTelephoneNumber + '\'' +
+				", userNickName='" + userNickName + '\'' +
+				", token='" + token + '\'' +
+				'}';
 	}
-	
 }
