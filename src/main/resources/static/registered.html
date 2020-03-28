@@ -47,59 +47,59 @@
 </div>
 <script type="text/javascript">
     $(function () {
-    	$("input").blur(function(){
-    		$("#message").html("");
-    	});
-    	
-    	$(document).keydown(function (event) {
+        $("input").blur(function () {
+            $("#message").html("");
+        });
+
+        $(document).keydown(function (event) {
             if (event.keyCode == 13) {
-              $('#btn').triggerHandler('click');
+                $('#btn').triggerHandler('click');
             }
         });
 
-        $("#username").blur(function(){
+        $("#username").blur(function () {
             var userName = $(this).val();
-            if(userName == null || userName == ''){
+            if (userName == null || userName == '') {
                 return;
             }
             $.ajax({
-                type : "get",
-                url : "http://localhost:8080/getUserByName",
-                data : {userName},
-                dataType : "json",
-                success: function (data){
+                type: "get",
+                url: "http://localhost:8080/getUserByName",
+                data: {userName},
+                dataType: "json",
+                success: function (data) {
                     console.log(data);
                 },
-                error: function(e){
+                error: function (e) {
                     console.log(e);
                 }
             })
         })
-    	
+
         $('#btn').click(function (e) {
-        	
+
             var userName = $("#username").val();
             var userPassword = $("#password").val();
             var confirmpassword = $("#confirmpassword").val();
             var userTelephoneNumber = $("#phone").val();
 
-            if (userName == null || userName == '' || userPassword == null || userPassword == '' || confirmpassword == null || confirmpassword == '' || phone == null ||phone == '') {
+            if (userName == null || userName == '' || userPassword == null || userPassword == '' || confirmpassword == null || confirmpassword == '' || phone == null || phone == '') {
                 $("#message").html("用户名、密码、手机号不能为空,请重新填写后提交");
                 return;
             }
-            
-            if(userPassword != confirmpassword){
-            	$("#message").html("两次输入密码需一致,请重新填写后提交");
-            	return;
+
+            if (userPassword != confirmpassword) {
+                $("#message").html("两次输入密码需一致,请重新填写后提交");
+                return;
             }
 
             $.ajax({
                 type: "get",
                 url: "http://localhost:8080/registered",
-                data: { userName, userPassword, userTelephoneNumber },
+                data: {userName, userPassword, userTelephoneNumber},
                 datatype: "json",
                 success: function (data) {
-                    console.log(data); 
+                    console.log(data);
                     $("#message").html(data.states);
                 },
                 error: function (e) {
