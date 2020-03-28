@@ -44,7 +44,7 @@
         let serverPublicKey = '';
         $.ajax({
             type: "get",
-            url: "http://localhost:8080/getRSAKey",
+            url: "getRSAKey",
             data: {},
             datatype: "json",
             success: function (data) {
@@ -90,7 +90,7 @@
             //let publicKey = window.jsPublicKey;
             $.ajax({
                 type: "post",
-                url: "http://localhost:8080/login",
+                url: "login",
                 data: {userName, passWord, key}, //publicKey rsa公钥，日后可能用到
                 datatype: "json",
                 success: function (data) {

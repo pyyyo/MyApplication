@@ -64,7 +64,7 @@
             }
             $.ajax({
                 type: "get",
-                url: "http://localhost:8080/getUserByName",
+                url: "getUserByName",
                 data: {userName},
                 dataType: "json",
                 success: function (data) {
@@ -95,7 +95,7 @@
 
             $.ajax({
                 type: "get",
-                url: "http://localhost:8080/registered",
+                url: "registered",
                 data: {userName, userPassword, userTelephoneNumber},
                 datatype: "json",
                 success: function (data) {

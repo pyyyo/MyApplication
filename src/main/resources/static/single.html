@@ -172,7 +172,7 @@
         var id = request['id'];
         jQuery.ajax({
             type: "get",
-            url: "http://localhost:8080/getArticlesById",
+            url: "getArticlesById",
             data: {id},
             datatype: "json",
             success: function (data) {
